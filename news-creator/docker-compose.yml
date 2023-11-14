@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: qtim-postgres
+    image: postgres:13.4-alpine
+    restart: always
+    ports:
+      - 5550:5432
+    environment:
+      TZ: Europe/Moscow
+      POSTGRES_USER: ${POSTGRES_USER:-qtim_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-qtim_password}
+      POSTGRES_DB: ${POSTGRES_DB:-qtim}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres_data:/data/postgres
+
+volumes:
+  postgres_data:
+    external: false
